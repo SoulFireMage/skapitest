@@ -25,8 +25,8 @@ Data lives in two tables, `starlog` and `sparks`. Anonymous visitors can't edit 
 
 ## Hosting
 
-- **GitHub Pages (automatic):** `.github/workflows/pages.yml` publishes the site on every push to `main`, at <https://soulfiremage.github.io/skapitest/>. One-time setup: Settings → Pages → Source: **GitHub Actions**.
-- **Skapi hosting:** Settings → Web Hosting → Register a subdomain, then upload these files on the Web Hosting page.
+- **GitHub Pages (automatic):** `.github/workflows/pages.yml` publishes the site on every push to `main`, at <https://soulfiremage.github.io/skapitest/>. One-time setup: Settings → Pages → Source: **GitHub Actions**, and make `main` the default branch. Until Pages is on, the workflow skips the deploy instead of failing.
+- **Skapi hosting:** live at <https://starship-whisperer.skapi.com>. Updates are uploaded through the Skapi connector (or the dashboard's Web Hosting page); Skapi has no deploy token, so it can't be automated from GitHub.
 
 ## Editing the chart
 
