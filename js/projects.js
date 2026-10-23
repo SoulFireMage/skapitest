@@ -245,3 +245,33 @@ var TRIVIA = [
   { p: 'inflation', t: 'The Bank of England’s inflation target is 2%, measured on CPI since December 2003 (before that it was RPIX).' },
   { p: 'openmemory', t: 'Anthropic introduced the Model Context Protocol, an open standard for connecting models to tools and data, in November 2024.' }
 ];
+
+// The second way to sort the sky: by how the thing was made, not what it is about.
+// This grouping is an interpretation; "AI-built" only lists projects whose README says so.
+var METHOD_CLUSTERS = [
+  { id: 'm-see',    name: 'Just To See What Happens', hue: 320, x: 330,  y: 260,
+    blurb: 'No brief, no deadline: poke it and watch.' },
+  { id: 'm-agent',  name: 'Let The AI Drive',         hue: 35,  x: 800,  y: 170,
+    blurb: 'Experiments where a model wrote the code and the human steered (each README says so).' },
+  { id: 'm-rigs',   name: 'Rigs In Daily Use',        hue: 200, x: 1270, y: 280,
+    blurb: 'Tools built because they were needed, and used.' },
+  { id: 'm-learn',  name: 'Learning Out Loud',        hue: 150, x: 600,  y: 610,
+    blurb: 'Built to understand something, often from scratch.' },
+  { id: 'm-worlds', name: 'Worldbuilding',            hue: 260, x: 1080, y: 640,
+    blurb: 'Stories, characters and the places they live.' },
+  { id: 'm-data',   name: 'Making Data Legible',      hue: 15,  x: 330,  y: 840,
+    blurb: 'Public or private data, turned into something you can read.' }
+];
+
+var METHOD_OF = {
+  'blankaiarena': 'm-see', 'quantumpizza': 'm-see', 'conceptexplorer': 'm-see', 'katiya': 'm-see',
+  'selfplay': 'm-see', 'jev': 'm-see', 'pyspinor': 'm-see', 'flappybird': 'm-see',
+  'timelog': 'm-agent', 'devnotes': 'm-agent', 'sqlshell': 'm-agent', 'mdedit': 'm-agent', 'algebragan': 'm-agent',
+  'openrouter-claude': 'm-rigs', 'ua': 'm-rigs', 'openmemory': 'm-rigs', 'aidigest': 'm-rigs',
+  'spinor-lib': 'm-rigs', 'threads': 'm-rigs', 'msrf': 'm-rigs',
+  'syllabus': 'm-learn', 'neuralnetworks': 'm-learn', 'digits': 'm-learn', 'gep': 'm-learn',
+  'tensorflow': 'm-learn', 'paint': 'm-learn', 'flowprinter': 'm-learn', 'animatedart': 'm-learn',
+  'codingchallenge': 'm-learn',
+  'aktarian': 'm-worlds', 'multistory': 'm-worlds', 'blog': 'm-worlds',
+  'openlogz': 'm-data', 'aichathistory': 'm-data', 'inflation': 'm-data', 'crime': 'm-data', 'tvguide': 'm-data'
+};

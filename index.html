@@ -31,13 +31,17 @@
   <main>
     <section id="chart" aria-label="Star chart of projects">
       <div class="chart-tools">
+        <div class="lens" role="group" aria-label="Group the stars">
+          <button type="button" data-view-btn="topic" aria-pressed="true" title="What each project is about">By topic</button>
+          <button type="button" data-view-btn="method" aria-pressed="false" title="How each project was made">By how it was made</button>
+        </div>
         <button type="button" id="walk">Follow a thread</button>
         <button type="button" id="surprise">Surprise me</button>
         <span id="walk-note" aria-live="polite"></span>
       </div>
       <div class="sky-wrap">
         <svg id="sky" viewBox="0 0 1600 1020" preserveAspectRatio="xMidYMid meet" role="img"
-             aria-label="Six constellations of projects joined by threads. Each star is a project; select one for details.">
+             aria-label="Six constellations of projects joined by threads, grouped by topic or by how they were made. Each star is a project; select one for details.">
           <defs>
             <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
           </defs>
@@ -75,6 +79,7 @@
 
     <section aria-labelledby="list-h">
       <h2 id="list-h">Every star, by constellation</h2>
+      <p class="sub">Grouped the same way as the chart. Switch between topic and method above it.</p>
       <div id="list" class="grid"></div>
     </section>
 

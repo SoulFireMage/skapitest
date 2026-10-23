@@ -6,9 +6,13 @@
   var byId = {};
   PROJECTS.forEach(function (p) { byId[p.id] = p; });
   var clusterById = {};
-  CLUSTERS.forEach(function (c) { clusterById[c.id] = c; });
+  CLUSTERS.concat(METHOD_CLUSTERS).forEach(function (c) { clusterById[c.id] = c; });
 
-  var state = { lens: 'kat', selected: null, sparks: {}, walkTimer: null };
+  var state = { lens: 'kat', view: 'topic', selected: null, sparks: {}, walkTimer: null };
+
+  // Two ways to group the same stars: by topic, or by how the project was made.
+  function groups() { return state.view === 'method' ? METHOD_CLUSTERS : CLUSTERS; }
+  function groupOf(p) { return clusterById[state.view === 'method' ? METHOD_OF[p.id] : p.cluster]; }
 
   function $(sel) { return document.querySelector(sel); }
   function el(tag, attrs, text) {
@@ -33,8 +37,8 @@
   function layout() {
     var counts = {};
     PROJECTS.forEach(function (p) {
-      var c = clusterById[p.cluster];
-      var i = counts[p.cluster] = (counts[p.cluster] || 0) + 1;
+      var c = groupOf(p);
+      var i = counts[c.id] = (counts[c.id] || 0) + 1;
       var a = i * 2.39996 + c.hue / 57.3;
       var r = 22 + 46 * Math.sqrt(i);
       p.x = c.x + Math.cos(a) * r * 1.25;
@@ -56,13 +60,16 @@
   // ---------- the sky
   function drawSky() {
     var root = $('#sky');
+    Array.prototype.slice.call(root.children).forEach(function (n) {
+      if (n.tagName.toLowerCase() !== 'defs') root.removeChild(n);
+    });
     var gLinks = svg('g', { 'class': 'links' });
     var gThreads = svg('g', { 'class': 'threads' });
     var gLabels = svg('g', { 'class': 'clabels' });
     var gStars = svg('g', { 'class': 'stars' });
 
-    CLUSTERS.forEach(function (c) {
-      var members = PROJECTS.filter(function (p) { return p.cluster === c.id; });
+    groups().forEach(function (c) {
+      var members = PROJECTS.filter(function (p) { return groupOf(p) === c; });
       for (var i = 1; i < members.length; i++) {
         gLinks.appendChild(svg('line', {
           x1: members[i - 1].x, y1: members[i - 1].y, x2: members[i].x, y2: members[i].y,
@@ -88,7 +95,7 @@
     });
 
     PROJECTS.forEach(function (p) {
-      var c = clusterById[p.cluster];
+      var c = groupOf(p);
       var g = svg('g', {
         'class': 'star', tabindex: '0', role: 'button',
         'aria-label': p.name + ', ' + p.year + ', ' + c.name,
@@ -139,11 +146,12 @@
     var panel = $('#panel');
     var p = state.selected && byId[state.selected];
     if (!p) { panel.hidden = true; return; }
-    var c = clusterById[p.cluster];
+    var c = groupOf(p);
+    var topic = clusterById[p.cluster], method = clusterById[METHOD_OF[p.id]];
     panel.hidden = false;
     panel.classList.toggle('left', p.x > 800);
     panel.style.setProperty('--hue', c.hue);
-    $('#p-cluster').textContent = c.name;
+    $('#p-cluster').textContent = topic.name + ' \u00b7 ' + method.name;
     $('#p-name').textContent = p.name;
     $('#p-meta').textContent = p.year + ' · ' + p.lang;
     $('#p-summary').textContent = summary(p);
@@ -248,17 +256,31 @@
     renderList();
   }
 
+  // ---------- view: regroup the sky
+  function setView(view) {
+    state.view = view;
+    store('view', view);
+    document.querySelectorAll('[data-view-btn]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.viewBtn === view));
+    });
+    layout();
+    drawSky();
+    highlight(state.selected);
+    renderPanel();
+    renderList();
+  }
+
   // ---------- the list view (also the mobile-friendly way in)
   function renderList() {
     var root = $('#list');
     root.textContent = '';
-    CLUSTERS.forEach(function (c) {
+    groups().forEach(function (c) {
       var sec = el('section', { 'class': 'cluster' });
       sec.style.setProperty('--hue', c.hue);
       sec.appendChild(el('h3', null, c.name));
       sec.appendChild(el('p', { 'class': 'cblurb' }, c.blurb));
       var ul = el('ul');
-      PROJECTS.filter(function (p) { return p.cluster === c.id; })
+      PROJECTS.filter(function (p) { return groupOf(p) === c; })
         .sort(function (a, b) { return b.year - a.year; })
         .forEach(function (p) {
           var li = el('li');
@@ -452,8 +474,7 @@
   }
 
   // ---------- go
-  layout();
-  drawSky();
+  state.view = store('view') === 'method' ? 'method' : 'topic';
   starfield();
 
   var years = PROJECTS.map(function (p) { return p.year; });
@@ -463,6 +484,9 @@
 
   document.querySelectorAll('[data-lens-btn]').forEach(function (b) {
     b.addEventListener('click', function () { setLens(b.dataset.lensBtn); });
+  });
+  document.querySelectorAll('[data-view-btn]').forEach(function (b) {
+    b.addEventListener('click', function () { if (b.dataset.viewBtn !== state.view) setView(b.dataset.viewBtn); });
   });
   $('#walk').addEventListener('click', walk);
   $('#surprise').addEventListener('click', function () {
@@ -481,6 +505,7 @@
   wireSpark();
   wireStarlog();
   setLens(store('lens') === 'rich' ? 'rich' : 'kat');
+  setView(state.view);
   showTransmission(0);
 
   var hash = decodeURIComponent(location.hash.slice(1));
