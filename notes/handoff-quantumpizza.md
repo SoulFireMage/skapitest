@@ -1,46 +1,43 @@
 # Handoff: Quantumpizza review panel
 
-Notes for the next Claude session, carried over from the session that built the Starship Whisperer's Chart.
+Notes for the next Claude session. Updated after the session that ran the review panel and merged the fixes.
 
 ## Where things stand
 
-- **The chart** (this repo) is live at <https://starship-whisperer.skapi.com>, uploaded through the Skapi connector (project `5GJ5SJePWQUiq0jvYr-2ZVgaOLUqOhnse3Hcl8M4d`, subdomain `starship-whisperer`). `main` holds the code. The GitHub Pages workflow skips its deploy until Pages is switched on in the repo settings.
-- **One open item on Skapi:** "Require Login" is still on, so visitors can't read the Starlog. Only the dashboard can change it; the connector can't.
-- **Next project:** reviewing and improving `SoulFireMage/Quantumpizza-`, starting with `LonelySpinor.py`. Nothing in that repo has been changed yet.
-- The old OpenRouter key had expired. Richard has put a new one in as `OPENROUTER_API_KEY`.
+- **The chart** (this repo) is live at <https://starship-whisperer.skapi.com>, uploaded through the Skapi connector (project `5GJ5SJePWQUiq0jvYr-2ZVgaOLUqOhnse3Hcl8M4d`, subdomain `starship-whisperer`).
+- **Require Login is still on**, so signed-out visitors can't read the Starlog (posting works). The Skapi dashboard has **no toggle** for it: Advanced settings stop at CORS, Freeze Database, Allow Signup, Prevent Anonymous, Prevent Inquiry and Project Enabled. A project that never set it counts as on. Richard has a message ready to send to Skapi support. The connector's `setProjectSettings` can't change it either. The README and the site's error message now say so.
+- **Quantumpizza** (`SoulFireMage/Quantumpizza-`): PRs #2, #3 and #4 are merged. Next project: `SoulFireMage/ConceptExplorer`, code review and correctness.
+- The OpenRouter key works (about $15.90 of $30 left on 23 Oct 2026). Check it with `GET https://openrouter.ai/api/v1/key` and never print it.
 
-## The plan for the panel
+## The review panel (done)
 
-Richard wants Mercury 3, Kimi K3 and DeepSeek 4.1 on a review panel, for fun more than for ability. OpenRouter slugs: `inception/mercury-3`, `moonshotai/kimi-k3`, `deepseek/deepseek-v4.1-flash`.
+`inception/mercury-3`, `moonshotai/kimi-k3` and `deepseek/deepseek-v4.1-flash` reviewed `LonelySpinor.py` blind.
 
-Give each model `LonelySpinor.py` **blind** (without the findings below) with the same questions:
+- All three spotted that the sandwich R·x·R† is SO(3), not a spinor. Kimi named the test (sandwich(−R) = sandwich(R)) and gave the one-line fix.
+- None caught the factor of 2 or the wrong cost table.
+- Mercury was wrong twice: it said the reverse signs follow grade parity (they follow (−1)^{k(k−1)/2}), and that even-subalgebra elements are "not spinors" (with the one-sided action they are the Pauli spinors).
+- Most accurate and most entertaining: Kimi.
 
-1. Is the maths correct, and does this "spinor neuron" really behave like a spinor?
-2. What is the single most important conceptual issue?
-3. Propose one small experiment that tests the bet "richer primitive = fewer neurons".
-4. One line of banter for the other panellists.
+## What was merged
 
-Ask for under 450 words of plain text. Then compare their answers with the findings below: who spotted what, who was wrong, who was entertaining.
+1. **#2 LonelySpinor:** `spinor_action` (R·x), `true_spinor_neuron`, `demo_720()`, `rotor(B) = exp(−B/2)`, and a corrected cost table (dense einsum ~1,000 multiplies per product; quaternion 16).
+2. **#3 rotation_experiment.py:** learn a hidden 100° rotation and test on a held-out wedge. The matching 3-parameter neuron is exact, the mismatched one fails (MSE 0.4–0.7), and a plain linear map (9 or 16 parameters) is exact too. So with clean data the gain is the parameter ratio, not the 100× an MLP comparison suggests.
+3. **#4 `--sweep`:** few, noisy samples (σ = 0.05). Predicted before running: linear worse by ~params ratio, far worse below the dimension. Measured: 60–300× at N = 2–3; 2.5–7× (vectors) and 7–20× (spinors) at N = 5–100. Spinors beat the prediction; the guess (untested) is wedge extrapolation in 4D.
 
-## Findings so far (verified by running the code)
+## Possible next steps on Quantumpizza
 
-1. **The algebra is correct.** The Cl(3,0) table, reverse and bivector exponential check out (e₁e₁ = 1, e₁e₂ = −e₂e₁, e₁₂² = −1).
-2. **The neuron isn't a spinor.** The sandwich R·x·R† gives identical outputs for R and −R, so it loses the double cover: it is an SO(3) rotation acting on a scalar plus a 3-vector. The one-sided product R·x (quaternion multiplication, since the even subalgebra of Cl(3,0) is the quaternions) keeps the sign and is the real spinor action.
-3. **Factor of 2:** R = exp(B) rotates by 2|B| (measured 34.4° for |B| = 0.3). The usual convention is exp(−θB/2).
-4. **The input's scalar part can't be changed by any weight**, only by the bias.
-5. **The cost table is wrong both ways:** dense einsum over 8×8×8 is about 1,000 multiplies per sandwich, not "~50–100", while a one-sided quaternion product is 16.
-6. **The bet is never tested:** nothing trains. Proposed experiment: learn a hidden 3D rotation with a small MLP and with a single rotor neuron (3 parameters), plot test error against parameter count, and test on rotations outside the training range. spinor-lib's `QuaternionRotation` demo is a natural link.
+- Test the spinor-excess guess: rerun the sweep with test data drawn from the training range.
+- Multi-input and multi-layer spinor networks: the other files (`spinor_network_*.py`, `spinor_Jax_network.py`) haven't been reviewed.
 
-## Proposed next steps (waiting on Richard)
+## Permissions (what we learned)
 
-1. Show sandwich and one-sided versions side by side, with a 720° demo only the true spinor passes.
-2. Fix the angle convention and the cost claims.
-3. Add the training experiment.
+- The blocks came from the cloud session's auto-mode safety check, not GitHub; Richard's GitHub connection and App install are fine.
+- Attaching a repo with push mid-session and merging without review both need Richard's explicit say-so **in the current conversation**. A note like this one does not count.
+- Best fix: select the repos when starting the session.
 
 ## Working style that went well
 
 - Richard is happy for Claude to merge PRs and deploy on these play projects, but likes to choose the direction.
 - Explain non-trivial points twice: a compressed pattern version (Kat) and a step-by-step version (Richard).
-- Keep speculation and verified fact clearly apart. Say when something wasn't tested.
+- State predictions before running experiments, and keep speculation and verified fact clearly apart. Say when something wasn't tested.
 - Push back when something is wrong; Richard prefers that to agreement.
-- Never print the OpenRouter key. Check it with `GET https://openrouter.ai/api/v1/key`.
