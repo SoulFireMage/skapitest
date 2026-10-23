@@ -151,7 +151,7 @@
     panel.hidden = false;
     panel.classList.toggle('left', p.x > 800);
     panel.style.setProperty('--hue', c.hue);
-    $('#p-cluster').textContent = topic.name + ' \u00b7 ' + method.name;
+    $('#p-cluster').textContent = topic.name + ' · ' + method.name;
     $('#p-name').textContent = p.name;
     $('#p-meta').textContent = p.year + ' · ' + p.lang;
     $('#p-summary').textContent = summary(p);
