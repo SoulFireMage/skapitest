@@ -12,7 +12,7 @@ var Backend = (function () {
   function explain(err) {
     var code = err && err.code;
     if (code === 'REQUIRE_LOGIN') {
-      return 'Reading is blocked: the project still has "Require Login" on. Switch it off in the Skapi dashboard to let visitors read the Starlog.';
+      return 'The Starlog can\'t be read while signed out yet: the Skapi project still has "Require Login" on, and only Skapi can switch it off for now. Posting still works.';
     }
     if (code === 'SERVICE_DISABLED') return 'The Skapi project is suspended.';
     return (err && err.message) || 'Something went wrong talking to Skapi.';
