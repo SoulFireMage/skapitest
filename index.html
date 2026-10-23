@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Starship Whisperer's Chart</title>
+  <meta name="description" content="A star chart of SoulFireMage's projects: spinors, starships, harnesses, SQL and the threads that tie them together.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-lens="kat">
+  <canvas id="field" aria-hidden="true"></canvas>
+
+  <header class="top">
+    <div>
+      <p class="kicker">SoulFireMage &middot; Richard &amp; Katiya</p>
+      <h1>The Starship Whisperer's Chart</h1>
+      <p class="sub">
+        <span id="stat-count">0</span> projects, <span id="stat-threads">0</span> threads,
+        <span id="stat-span"></span>. Older stars are dimmer: their light left a long time ago.
+      </p>
+    </div>
+    <div class="controls">
+      <div class="lens" role="group" aria-label="Explanation lens">
+        <button type="button" data-lens-btn="kat" aria-pressed="true" title="Pattern first, compressed">&#9889; Kat lens</button>
+        <button type="button" data-lens-btn="rich" aria-pressed="false" title="Step by step, plainly">&#129521; Richard lens</button>
+      </div>
+      <span id="status" data-kind="off">backend: &hellip;</span>
+    </div>
+  </header>
+
+  <main>
+    <section id="chart" aria-label="Star chart of projects">
+      <div class="chart-tools">
+        <button type="button" id="walk">Follow a thread</button>
+        <button type="button" id="surprise">Surprise me</button>
+        <span id="walk-note" aria-live="polite"></span>
+      </div>
+      <div class="sky-wrap">
+        <svg id="sky" viewBox="0 0 1600 1020" preserveAspectRatio="xMidYMid meet" role="img"
+             aria-label="Six constellations of projects joined by threads. Each star is a project; select one for details.">
+          <defs>
+            <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+          </defs>
+        </svg>
+      </div>
+
+      <aside id="panel" hidden aria-live="polite">
+        <button type="button" id="p-close" aria-label="Close">&times;</button>
+        <p id="p-cluster" class="kicker"></p>
+        <h2 id="p-name"></h2>
+        <p id="p-meta" class="meta"></p>
+        <p id="p-summary"></p>
+        <p class="actions">
+          <a id="p-link" target="_blank" rel="noopener"></a>
+          <a id="p-alt" target="_blank" rel="noopener" hidden></a>
+          <button type="button" id="p-spark">&#10022; Spark this</button>
+        </p>
+        <h3 id="p-threads-h">Threads from here</h3>
+        <ul id="p-threads"></ul>
+        <div id="p-trivia" hidden>
+          <h3>Nearby fact</h3>
+          <p id="p-trivia-text"></p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="tx" aria-label="Transmission from the archive">
+      <p class="kicker">Incoming transmission</p>
+      <p id="tx-text" aria-live="polite"></p>
+      <p class="tx-foot">
+        <button type="button" class="linkish" id="tx-from"></button>
+        <button type="button" id="tx-next">Next &rarr;</button>
+      </p>
+    </section>
+
+    <section aria-labelledby="list-h">
+      <h2 id="list-h">Every star, by constellation</h2>
+      <div id="list" class="grid"></div>
+    </section>
+
+    <section id="starlog" aria-labelledby="log-h">
+      <h2 id="log-h">Starlog</h2>
+      <p class="sub">Passing through? Leave a line. Entries are public.</p>
+      <form id="log-form" autocomplete="off">
+        <div class="row">
+          <label>Callsign <input name="name" maxlength="40" placeholder="optional"></label>
+          <label>Came for <select name="project" id="log-project"><option value="">just looking</option></select></label>
+        </div>
+        <label>Message <textarea name="message" maxlength="280" rows="3" required></textarea></label>
+        <label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1"></label>
+        <button type="submit">Transmit</button>
+        <span id="log-note" aria-live="polite"></span>
+      </form>
+      <ul id="log-list"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Static HTML, a little SVG, and <a href="https://www.skapi.com" target="_blank" rel="noopener">Skapi</a> for the Starlog and sparks.
+      Code on <a href="https://github.com/SoulFireMage/skapitest" target="_blank" rel="noopener">GitHub</a>.</p>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/backend.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
