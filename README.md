@@ -25,7 +25,7 @@ Data lives in two tables, `starlog` and `sparks`. Anonymous visitors can't edit 
 
 ## Hosting
 
-- **GitHub Pages:** go to Settings → Pages and deploy from the branch.
+- **GitHub Pages (automatic):** `.github/workflows/pages.yml` publishes the site on every push to `main`, at <https://soulfiremage.github.io/skapitest/>. One-time setup: Settings → Pages → Source: **GitHub Actions**.
 - **Skapi hosting:** Settings → Web Hosting → Register a subdomain, then upload these files on the Web Hosting page.
 
 ## Editing the chart
