@@ -1,6 +1,8 @@
 # The Starship Whisperer's Chart
 
-A star chart of SoulFireMage's projects. Each project is a star, grouped into six
+A star chart of SoulFireMage's projects. **Live at <https://starship-whisperer.skapi.com>.**
+
+Each project is a star, grouped into six
 constellations, with **threads** that link the same idea across years or fields
 (PySpinor in 2015 → Quantumpizza → spinor-lib in 2026, for example).
 
