@@ -18,8 +18,8 @@ Plain static HTML, with no build step. Open `index.html` directly or host it any
 
 The Project ID is already in `js/config.js`. It's meant to be public, because every visitor's browser needs it.
 
-1. Turn **Require Login** off in the project's settings. It is on by default, and while it is on, signed-out visitors cannot read the Starlog or spark counts. Writing still works.
-2. Keep anonymous writes allowed (the default). Visitors post as anonymous users into the `public` access group.
+1. Get **Require Login** turned off. A project that has never set it counts as on, and while it is on, signed-out visitors cannot read the Starlog or spark counts. Writing still works. The dashboard has no toggle for it yet (its Advanced settings stop at Prevent Inquiry and Project Enabled), so ask Skapi support to set `require_login` to false for the project.
+2. Keep **Prevent Anonymous** off (the default). Visitors post as anonymous users into the `public` access group.
 
 Without an ID the site still works; only the Starlog and sparks are switched off.
 
