@@ -61,6 +61,10 @@ var PROJECTS = [
     url: 'https://soulfiremage.github.io',
     kat: 'Home port. HoTT thrown at proteins for fun, Linux adventures, the Aktarian Tales.',
     rich: 'The personal blog: maths-meets-databases posts, AI architecture notes, a Windows developer’s Linux diary, the Aktarian Tales fiction and a bring-your-own-key political objectivity tester.' },
+  { id: 'mechworld', name: 'MechWorld wiki', cluster: 'nebula', year: 2026, lang: 'DokuWiki · Docker',
+    url: 'https://soulfiremage-headmates-wiki.hf.space', alt: HF + 'headmates-wiki',
+    kat: 'The headmates got a house of their own. Anyone can read, invited ones write, and it remembers itself across reboots.',
+    rich: 'MechWorld, the headmates wiki, moved from Miraheze to a self-hosted DokuWiki in a Hugging Face Docker Space. Anyone can read it; only invited accounts can edit. Every change is mirrored to a private storage bucket within seconds and restored on each boot, so the wiki survives restarts on hardware that otherwise forgets everything.' },
 
   // ---- The Harness Belt
   { id: 'blankaiarena', name: 'Blank AI Arena', cluster: 'harness', year: 2026, lang: 'JS',
@@ -99,6 +103,10 @@ var PROJECTS = [
     url: GH + 'AIChatHistory',
     kat: 'Every chat with every model, one searchable vault.',
     rich: 'A local web app that imports ChatGPT and Claude conversation exports into PostgreSQL, then lets you search, group into projects and export to Markdown.' },
+  { id: 'talktoacell', name: 'Talk to a Cell', cluster: 'harness', year: 2026, lang: 'Python · Gradio',
+    url: HF + 'talk-to-a-cell', alt: GH + 'talk-to-a-cell',
+    kat: 'A model whose mother tongue is genes, with a translator either side. Hand it a real blood cell blind and see if it names it. The small one got 7 of 8.',
+    rich: 'Chat in plain English with Cell2Sentence, an AI that learned to read cells from 57 million real ones: give it a cell’s most active genes and it names the cell, or name a cell and it writes the genes. A general AI translates either side, and every reply shows exactly what Cell2Sentence itself said. “Show me it working” sends it a real, expert-labelled blood cell without the answer, then checks whether it got it right. Bring your own OpenRouter key; Expert mode needs none.' },
 
   // ---- Thinking Engines
   { id: 'threads', name: 'threads/', cluster: 'engines', year: 2026, lang: 'Python',
@@ -214,7 +222,13 @@ var THREADS = [
   { a: 'codingchallenge', b: 'sqlshell', why: 'A decade of the .NET/SQL day job.' },
   { a: 'tensorflow', b: 'neuralnetworks', why: 'From hand-rolled nets to frameworks.' },
   { a: 'animatedart', b: 'paint', why: 'WPF pixels, two ways.' },
-  { a: 'flowprinter', b: 'paint', why: 'Learning C# after VB, one WPF control at a time.' }
+  { a: 'flowprinter', b: 'paint', why: 'Learning C# after VB, one WPF control at a time.' },
+  { a: 'blog', b: 'talktoacell', why: 'The blog’s experiments pointing Claude at a gene-expression model grow into an app anyone can use.' },
+  { a: 'talktoacell', b: 'openrouter-claude', why: 'Bring your own key: it stays in the browser and goes only to OpenRouter.' },
+  { a: 'talktoacell', b: 'blankaiarena', why: 'The same bring-your-own-key pattern, a very different playground.' },
+  { a: 'talktoacell', b: 'jev', why: 'Specialist models as instruments, with a general model reading the dials.' },
+  { a: 'mechworld', b: 'katiya', why: 'The headmates on the web: an archive of accidental maths, and a wiki of their own.' },
+  { a: 'mechworld', b: 'openlogz', why: 'Private storage buckets as memory: logs in one, a whole wiki’s backup in the other.' }
 ];
 
 // Trivia: true things, each tied to a project. Speculation lives on the Katiya archive, not here.
@@ -243,7 +257,9 @@ var TRIVIA = [
   { p: 'neuralnetworks', t: 'Frank Rosenblatt’s perceptron dates from 1958. It was built as hardware, the Mark I Perceptron, as well as described in software.' },
   { p: 'gep', t: 'F# was created by Don Syme at Microsoft Research, and its first version appeared in 2005.' },
   { p: 'inflation', t: 'The Bank of England’s inflation target is 2%, measured on CPI since December 2003 (before that it was RPIX).' },
-  { p: 'openmemory', t: 'Anthropic introduced the Model Context Protocol, an open standard for connecting models to tools and data, in November 2024.' }
+  { p: 'openmemory', t: 'Anthropic introduced the Model Context Protocol, an open standard for connecting models to tools and data, in November 2024.' },
+  { p: 'talktoacell', t: 'The PBMC 3k dataset behind the scanpy tutorial holds about 2,700 white blood cells from one healthy donor, sequenced by 10x Genomics. It is the “hello world” of single-cell biology.' },
+  { p: 'mechworld', t: 'DokuWiki, created by Andreas Gohr in 2004, keeps every page as a plain text file and needs no database. Plain files make a whole wiki easy to copy somewhere safe and bring back.' }
 ];
 
 // The second way to sort the sky: by how the thing was made, not what it is about.
@@ -273,5 +289,6 @@ var METHOD_OF = {
   'tensorflow': 'm-learn', 'paint': 'm-learn', 'flowprinter': 'm-learn', 'animatedart': 'm-learn',
   'codingchallenge': 'm-learn',
   'aktarian': 'm-worlds', 'multistory': 'm-worlds', 'blog': 'm-worlds',
-  'openlogz': 'm-data', 'aichathistory': 'm-data', 'inflation': 'm-data', 'crime': 'm-data', 'tvguide': 'm-data'
+  'openlogz': 'm-data', 'aichathistory': 'm-data', 'inflation': 'm-data', 'crime': 'm-data', 'tvguide': 'm-data',
+  'talktoacell': 'm-data', 'mechworld': 'm-worlds'
 };

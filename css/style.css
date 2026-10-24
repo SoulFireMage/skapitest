@@ -83,7 +83,7 @@ main > section { margin: 32px 0; }
   box-shadow: 0 10px 40px rgba(0,0,0,.5);
 }
 #panel.left { right: auto; left: 12px; }
-#panel .kicker { color: hsl(var(--hue) 80% 75%); }
+#panel .kicker { color: hsl(var(--hue) 80% 75%); padding-right: 36px; }
 #p-close { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; padding: 0; font-size: 1.2rem; }
 #p-summary { font-size: 1.02rem; }
 body[data-lens="kat"] #p-summary { font-style: italic; }
