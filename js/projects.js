@@ -13,7 +13,7 @@ var CLUSTERS = [
     blurb: 'Starships, tulpas, stories, accidental mathematics.' },
   { id: 'harness', name: 'The Harness Belt',      hue: 35,  x: 1270, y: 280,
     blurb: 'Small rigs for poking language models.' },
-  { id: 'engines', name: 'Thinking Engines',      hue: 150, x: 560,  y: 560,
+  { id: 'engines', name: 'Thinking Engines',      hue: 150, x: 560,  y: 530,
     blurb: 'Tools built for an associative, thread-hopping mind.' },
   { id: 'sql',     name: 'The SQL Quarter',       hue: 260, x: 1080, y: 640,
     blurb: 'Day-job gravity: databases, editors, dashboards.' },
@@ -125,6 +125,10 @@ var PROJECTS = [
     url: GH + 'Personal-Study-Syllabus',
     kat: 'Left school at 16, wrote your own university. Ten years later, built the engine for it.',
     rich: 'A 2015 self-designed computer science and maths syllabus, built after reading a university course list, using MOOCs, textbooks and F# as the main language.' },
+  { id: 'rhetoricforge', name: 'The Rhetoric Forge', cluster: 'engines', year: 2026, lang: 'TypeScript · Preact',
+    url: 'https://soulfiremage.github.io/rhetoric-salle/', alt: GH + 'rhetoric-salle',
+    kat: 'Arguments on the dissecting table. Click the hidden warrant, build a chiasmus against the clock, then fence an AI with one secret dirty trick per round.',
+    rich: 'A training app for argument and style. Its drills have exact answers: click the sentence that holds an unstated assumption, or put a periodic sentence together before the timer runs out. Each skill gets its own chess-style rating and a bar showing when it needs revisiting. With your own OpenRouter key, an AI judge grades rewrites against a checklist, and in the Fencing Salle you debate an AI opponent while a separate arbiter scores the bout.' },
 
   // ---- The SQL Quarter
   { id: 'sqlshell', name: 'sqlshell', cluster: 'sql', year: 2026, lang: 'Python',
@@ -228,6 +232,10 @@ var THREADS = [
   { a: 'talktoacell', b: 'blankaiarena', why: 'The same bring-your-own-key pattern, a very different playground.' },
   { a: 'talktoacell', b: 'jev', why: 'Specialist models as instruments, with a general model reading the dials.' },
   { a: 'mechworld', b: 'katiya', why: 'The headmates on the web: an archive of accidental maths, and a wiki of their own.' },
+  { a: 'rhetoricforge', b: 'msrf', why: 'Same drill shape: a judge model grades free-form answers against a reference, and spaced repetition decides what comes back.' },
+  { a: 'rhetoricforge', b: 'threads', why: 'Two lenses again: every term has a formal and a modern name, and the guide explains ratings compressed and then step by step.' },
+  { a: 'rhetoricforge', b: 'openrouter-claude', why: 'Bring your own key: it stays in the browser and goes only to OpenRouter.' },
+  { a: 'rhetoricforge', b: 'multistory', why: 'Models playing characters: story roles in one, debate opponents carrying secret tactics in the other.' },
   { a: 'mechworld', b: 'openlogz', why: 'Private storage buckets as memory: logs in one, a whole wiki’s backup in the other.' }
 ];
 
@@ -259,6 +267,8 @@ var TRIVIA = [
   { p: 'inflation', t: 'The Bank of England’s inflation target is 2%, measured on CPI since December 2003 (before that it was RPIX).' },
   { p: 'openmemory', t: 'Anthropic introduced the Model Context Protocol, an open standard for connecting models to tools and data, in November 2024.' },
   { p: 'talktoacell', t: 'The PBMC 3k dataset behind the scanpy tutorial holds about 2,700 white blood cells from one healthy donor, sequenced by 10x Genomics. It is the “hello world” of single-cell biology.' },
+  { p: 'rhetoricforge', t: 'Stephen Toulmin set out his model of argument (claim, data, warrant, backing, qualifier, rebuttal) in The Uses of Argument, published in 1958.' },
+  { p: 'rhetoricforge', t: 'Arpad Elo’s rating system was adopted by the US Chess Federation in 1960 and by FIDE in 1970. Mark Glickman’s Glicko, which adds a measure of how uncertain each rating is, followed in 1995.' },
   { p: 'mechworld', t: 'DokuWiki, created by Andreas Gohr in 2004, keeps every page as a plain text file and needs no database. Plain files make a whole wiki easy to copy somewhere safe and bring back.' }
 ];
 
@@ -290,5 +300,5 @@ var METHOD_OF = {
   'codingchallenge': 'm-learn',
   'aktarian': 'm-worlds', 'multistory': 'm-worlds', 'blog': 'm-worlds',
   'openlogz': 'm-data', 'aichathistory': 'm-data', 'inflation': 'm-data', 'crime': 'm-data', 'tvguide': 'm-data',
-  'talktoacell': 'm-data', 'mechworld': 'm-worlds'
+  'talktoacell': 'm-data', 'mechworld': 'm-worlds', 'rhetoricforge': 'm-agent'
 };
