@@ -34,3 +34,5 @@ Data lives in two tables, `starlog` and `sparks`. Anonymous visitors can't edit 
 
 All content is in `js/projects.js`: `CLUSTERS`, `PROJECTS` (with `kat` and `rich` summaries), `THREADS` and `TRIVIA`.
 Star positions are computed, so to add a project you append an entry to the list.
+
+For a Claude session, the `add-star` skill (`.claude/skills/add-star/SKILL.md`) covers the whole job: the fields, the voice for the two lenses, checks, screenshots, merging, and uploading to Skapi with a size check.
