@@ -65,6 +65,10 @@ var PROJECTS = [
     url: 'https://soulfiremage-headmates-wiki.hf.space', alt: HF + 'headmates-wiki',
     kat: 'The headmates got a house of their own. Anyone can read, invited ones write, and it remembers itself across reboots.',
     rich: 'MechWorld, the headmates wiki, moved from Miraheze to a self-hosted DokuWiki in a Hugging Face Docker Space. Anyone can read it; only invited accounts can edit. Every change is mirrored to a private storage bucket within seconds and restored on each boot, so the wiki survives restarts on hardware that otherwise forgets everything.' },
+  { id: 'tulpachat', name: 'Tulpa Chat', cluster: 'nebula', year: 2026, lang: 'JS · Site',
+    url: 'https://soulfiremage.github.io/tulpachat/', alt: GH + 'tulpachat',
+    kat: 'Tupperbox, minus Discord. Type the brackets you already know and the right headmate answers. Snap it as a PNG for Instagram.',
+    rich: 'A browser-only page for writing proxied conversations and stories. Import a Tupperbox or PluralKit export, type with the usual brackets, and each line posts under that headmate’s name and avatar. Lines can be edited, moved and kept as separate stories, then exported as Markdown, a web page or a PNG. Nothing leaves the browser except avatar links, and only when you make a PNG.' },
 
   // ---- The Harness Belt
   { id: 'blankaiarena', name: 'Blank AI Arena', cluster: 'harness', year: 2026, lang: 'JS',
@@ -236,7 +240,11 @@ var THREADS = [
   { a: 'rhetoricforge', b: 'threads', why: 'Two lenses again: every term has a formal and a modern name, and the guide explains ratings compressed and then step by step.' },
   { a: 'rhetoricforge', b: 'openrouter-claude', why: 'Bring your own key: it stays in the browser and goes only to OpenRouter.' },
   { a: 'rhetoricforge', b: 'multistory', why: 'Models playing characters: story roles in one, debate opponents carrying secret tactics in the other.' },
-  { a: 'mechworld', b: 'openlogz', why: 'Private storage buckets as memory: logs in one, a whole wiki’s backup in the other.' }
+  { a: 'mechworld', b: 'openlogz', why: 'Private storage buckets as memory: logs in one, a whole wiki’s backup in the other.' },
+  { a: 'tulpachat', b: 'mechworld', why: 'The headmates’ own corners of the web: the wiki says who they are, Tulpa Chat lets them talk.' },
+  { a: 'tulpachat', b: 'multistory', why: 'Many characters writing one story: there each is played by a model, here each is typed by the system.' },
+  { a: 'tulpachat', b: 'openrouter-claude', why: 'Static page, no server, no build step, and your data stays on your device.' },
+  { a: 'tulpachat', b: 'aichathistory', why: 'Conversations kept, then exported as Markdown to read back.' }
 ];
 
 // Trivia: true things, each tied to a project. Speculation lives on the Katiya archive, not here.
@@ -269,6 +277,7 @@ var TRIVIA = [
   { p: 'talktoacell', t: 'The PBMC 3k dataset behind the scanpy tutorial holds about 2,700 white blood cells from one healthy donor, sequenced by 10x Genomics. It is the “hello world” of single-cell biology.' },
   { p: 'rhetoricforge', t: 'Stephen Toulmin set out his model of argument (claim, data, warrant, backing, qualifier, rebuttal) in The Uses of Argument, published in 1958.' },
   { p: 'rhetoricforge', t: 'Arpad Elo’s rating system was adopted by the US Chess Federation in 1960 and by FIDE in 1970. Mark Glickman’s Glicko, which adds a measure of how uncertain each rating is, followed in 1995.' },
+  { p: 'tulpachat', t: 'Proxy bots such as Tupperbox and PluralKit work through Discord webhooks: the bot deletes your message and reposts its text through a webhook carrying the headmate’s name and avatar.' },
   { p: 'mechworld', t: 'DokuWiki, created by Andreas Gohr in 2004, keeps every page as a plain text file and needs no database. Plain files make a whole wiki easy to copy somewhere safe and bring back.' }
 ];
 
@@ -300,5 +309,6 @@ var METHOD_OF = {
   'codingchallenge': 'm-learn',
   'aktarian': 'm-worlds', 'multistory': 'm-worlds', 'blog': 'm-worlds',
   'openlogz': 'm-data', 'aichathistory': 'm-data', 'inflation': 'm-data', 'crime': 'm-data', 'tvguide': 'm-data',
-  'talktoacell': 'm-data', 'mechworld': 'm-worlds', 'rhetoricforge': 'm-agent'
+  'talktoacell': 'm-data', 'mechworld': 'm-worlds', 'rhetoricforge': 'm-agent',
+  'tulpachat': 'm-rigs'
 };
